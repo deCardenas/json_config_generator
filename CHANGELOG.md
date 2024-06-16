@@ -1,18 +1,26 @@
+## 0.1.6
+
+- update documentation.
+
+## 0.1.5
+
+- update dependencies.
+
 ## 0.1.4
 
-- update dependencies
+- update dependencies.
 
 ## 0.1.3
 
-- update dependencies
+- update dependencies.
 
 ## 0.1.2
 
-- add documentation
+- add documentation.
 
 ## 0.1.1
 
-- add example file
+- add example file.
 
 ## 0.1.0
 

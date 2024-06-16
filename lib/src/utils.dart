@@ -11,6 +11,7 @@ void throwError(String message, {Element? element}) {
   );
 }
 
+/// Error Generator class
 class InvalidGenerationSourceError implements Exception {
   final String message;
   final Element? element;

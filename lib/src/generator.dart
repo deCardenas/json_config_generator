@@ -12,7 +12,9 @@ import 'package:json_config_generator/src/utils.dart';
 import 'package:recase/recase.dart';
 import 'package:source_gen/source_gen.dart';
 
+/// Internal class that generate the Config class
 class JsonConfigGenerator extends GeneratorForAnnotation<Configuration> {
+  /// Unique constructor for the class
   const JsonConfigGenerator();
 
   @override
@@ -52,6 +54,7 @@ class JsonConfigGenerator extends GeneratorForAnnotation<Configuration> {
     return map;
   }
 
+  /// Method that generate a Map of environments
   Map<String, String> generateEnvironmentMap(
       List<DartObject> environments, Element element) {
     final map = Map<String, String>();
@@ -78,6 +81,7 @@ class JsonConfigGenerator extends GeneratorForAnnotation<Configuration> {
     return map;
   }
 
+  /// Method that generate an Enum for environments
   Enum environmentEnumGenerator(String enumName, Map<String, String> map) {
     final builder = EnumBuilder()
       ..name = enumName
@@ -86,6 +90,7 @@ class JsonConfigGenerator extends GeneratorForAnnotation<Configuration> {
     return builder.build();
   }
 
+  /// Main method that generate the generated class
   String mainClassGenerator(String name, Map<String, dynamic> config,
       {String? environmentName,
       Map<String, String>? environmentMap,
@@ -175,6 +180,7 @@ class JsonConfigGenerator extends GeneratorForAnnotation<Configuration> {
     return stringConverter(mainClass) + subClasses;
   }
 
+  /// Helper method that generate subclasses
   String subClassesGenerator(String name, dynamic values) {
     Map<String, dynamic> data;
     String subClasses = '';
@@ -271,6 +277,7 @@ class JsonConfigGenerator extends GeneratorForAnnotation<Configuration> {
     return stringConverter(subclass) + subClasses;
   }
 
+  /// Method that recognize value type
   String getType(String key, dynamic value) {
     if (value is String) {
       return 'String';
@@ -287,6 +294,7 @@ class JsonConfigGenerator extends GeneratorForAnnotation<Configuration> {
     }
   }
 
+  /// Method that generate the class string from Spec
   String stringConverter(Spec obj) {
     final emitter = DartEmitter(useNullSafetySyntax: true);
     return DartFormatter().format(obj.accept(emitter).toString());
