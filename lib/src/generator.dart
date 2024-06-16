@@ -1,15 +1,16 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:analyzer/dart/constant/value.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
 import 'package:built_collection/built_collection.dart';
-import 'package:json_config_generator/src/utils.dart';
-import 'package:source_gen/source_gen.dart';
-import 'package:json_config_annotation/json_config_annotation.dart';
-import 'dart:io';
-import 'dart:convert';
-import 'package:recase/recase.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:dart_style/dart_style.dart';
+import 'package:json_config_annotation/json_config_annotation.dart';
+import 'package:json_config_generator/src/utils.dart';
+import 'package:recase/recase.dart';
+import 'package:source_gen/source_gen.dart';
 
 class JsonConfigGenerator extends GeneratorForAnnotation<Configuration> {
   const JsonConfigGenerator();
@@ -91,25 +92,21 @@ class JsonConfigGenerator extends GeneratorForAnnotation<Configuration> {
       String? configFile}) {
     String initMethodBody = '';
     if (configFile != null) {
-      initMethodBody +=
-          '''
+      initMethodBody += '''
       final jsonString = await rootBundle.loadString('$configFile');
       final ${name.camelCase} = json.decode(jsonString) as Map<String, dynamic>;
     ''';
     } else {
-      initMethodBody =
-          '''
+      initMethodBody = '''
       String path = '';
       switch(${environmentName!.camelCase}){
     ''';
-      environmentMap!.entries.forEach((entry) => initMethodBody +=
-          '''
+      environmentMap!.entries.forEach((entry) => initMethodBody += '''
       case ${environmentName}.${entry.key}:
         path = '${entry.value}';
         break;
     ''');
-      initMethodBody +=
-          '''
+      initMethodBody += '''
       }
       final jsonString = await rootBundle.loadString(path);
       final ${name.camelCase} = json.decode(jsonString) as Map<String, dynamic>;
@@ -275,18 +272,19 @@ class JsonConfigGenerator extends GeneratorForAnnotation<Configuration> {
   }
 
   String getType(String key, dynamic value) {
-    if (value is String)
+    if (value is String) {
       return 'String';
-    else if (value is bool)
+    } else if (value is bool) {
       return 'bool';
-    else if (value is int)
+    } else if (value is int) {
       return 'int';
-    else if (value is double)
+    } else if (value is double) {
       return 'double';
-    else if (value is List)
+    } else if (value is List) {
       return 'List<${getType(key, value.first)}>';
-    else
+    } else {
       return '_${key.pascalCase}';
+    }
   }
 
   String stringConverter(Spec obj) {

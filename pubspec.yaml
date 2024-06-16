@@ -1,20 +1,21 @@
 name: json_config_generator
-description: Configuration generator from json files.
-version: 0.1.3
+description: Configuration generator from json files. Transform json file in a useful class
+version: 0.1.4
 homepage: https://github.com/deCardenas/json_config_generator
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=2.12.0 <4.0.0"
 
 dependencies:
-  analyzer: ^3.1.0
+  analyzer: ^6.5.0
   build: ^2.2.1
   dart_style: ^2.2.1
   source_gen: ^1.2.1
   code_builder: ^4.1.0
   build_config: ^1.0.0
   built_collection: ^5.1.1
-  json_config_annotation: ^0.1.1
+  json_config_annotation: ^0.1.2
   recase: ^4.0.0
 
 dev_dependencies:
+  lints: ^4.0.0
